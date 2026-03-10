@@ -71,7 +71,7 @@ export default function WeeklyPlanner() {
 
   // ── Week Panel (shared between desktop & mobile) ──
   const weekPanel = (draggable = true) => (
-    <div className="px-4 md:px-8 py-6">
+    <div className="px-4 md:px-8 py-6 md:flex md:flex-col md:h-full">
       <WeekNavigation
         weekDates={weekDates}
         weekOffset={planner.weekOffset}
@@ -80,8 +80,8 @@ export default function WeeklyPlanner() {
         onToggleWeekend={toggleWeekend}
       />
 
-      <div className="md:overflow-x-auto md:-mx-8 md:px-8" style={{ scrollbarWidth: "thin" }}>
-        <div className="flex flex-col md:flex-row md:min-w-[900px] divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-gray-700/60">
+      <div className="md:overflow-x-auto md:-mx-8 md:px-8 md:flex-1" style={{ scrollbarWidth: "thin" }}>
+        <div className="flex flex-col md:flex-row md:h-full md:min-w-[900px] divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-gray-700/60">
           {visibleDays.map((day) => {
             const date = weekDates[day];
             const dateKey = toISODate(date);

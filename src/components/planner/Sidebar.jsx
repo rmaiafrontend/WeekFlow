@@ -20,7 +20,7 @@ export default function Sidebar({
     const completedTasks = tasks.filter(t => t.completed).length;
 
     return (
-        <div className="flex flex-col h-full bg-gray-50/50 dark:bg-gray-900">
+        <div className="flex flex-col h-full bg-gray-50/50 dark:bg-gray-800/40">
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
                 <div className="flex items-center gap-2">
