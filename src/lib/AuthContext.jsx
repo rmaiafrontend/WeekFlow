@@ -32,20 +32,13 @@ export const AuthProvider = ({ children }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const logout = async (shouldRedirect = true) => {
+  const logout = async () => {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-      if (shouldRedirect) {
-        window.location.href = '/login';
-      }
     } catch (error) {
       console.error('Logout error:', error);
     }
-  };
-
-  const navigateToLogin = () => {
-    window.location.href = '/login';
   };
 
   return (
@@ -56,7 +49,6 @@ export const AuthProvider = ({ children }) => {
         isLoadingAuth,
         authError,
         logout,
-        navigateToLogin,
       }}
     >
       {children}
