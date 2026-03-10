@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Droppable } from "@hello-pangea/dnd";
 import { DAY_LABELS } from "@/lib/date-utils";
 
-export default function DayColumn({ day, date, dateKey, tasks, projects, onAddTask, onToggle, onDelete, onMoveDay, onEdit, isToday, draggable = true }) {
+export default function DayColumn({ day, date, dateKey, tasks, projects, onAddTask, onToggle, onDelete, onMoveDay, onUnschedule, onEdit, isToday, draggable = true }) {
   const projectMap = Object.fromEntries(projects.map(p => [p.id, p]));
   const done = tasks.filter(t => t.completed).length;
 
@@ -25,6 +25,7 @@ export default function DayColumn({ day, date, dateKey, tasks, projects, onAddTa
               onToggle={onToggle}
               onDelete={onDelete}
               onMoveDay={onMoveDay}
+              onUnschedule={onUnschedule}
               onEdit={onEdit}
               index={draggable ? index : undefined}
               compact

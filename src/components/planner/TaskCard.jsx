@@ -1,5 +1,5 @@
 import React from "react";
-import { MoreHorizontal, Trash2, GripVertical, Pencil } from "lucide-react";
+import { MoreHorizontal, Trash2, GripVertical, Pencil, CalendarOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,7 +10,7 @@ import {
 import ProjectBadge from "./ProjectBadge";
 import { Draggable } from "@hello-pangea/dnd";
 
-export default function TaskCard({ task, project, onToggle, onDelete, onMoveDay, onEdit, compact = false, index }) {
+export default function TaskCard({ task, project, onToggle, onDelete, onMoveDay, onUnschedule, onEdit, compact = false, index }) {
   // If index is undefined (e.g. from ProjectTaskList), render without drag
   const isDraggable = index !== undefined;
 
@@ -41,15 +41,21 @@ export default function TaskCard({ task, project, onToggle, onDelete, onMoveDay,
             <MoreHorizontal className="w-3.5 h-3.5 text-gray-400" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-44">
+        <DropdownMenuContent align="end" className="w-40 p-1">
           {onEdit && (
-            <DropdownMenuItem onClick={() => onEdit(task)}>
-              <Pencil className="w-3.5 h-3.5 mr-2" />
+            <DropdownMenuItem onClick={() => onEdit(task)} className="text-xs gap-2 py-1.5">
+              <Pencil className="w-3 h-3" strokeWidth={1.5} />
               Editar
             </DropdownMenuItem>
           )}
-          <DropdownMenuItem onClick={() => onDelete(task)} className="text-rose-500">
-            <Trash2 className="w-3.5 h-3.5 mr-2" />
+          {onUnschedule && task.scheduled_date && (
+            <DropdownMenuItem onClick={() => onUnschedule(task)} className="text-xs gap-2 py-1.5">
+              <CalendarOff className="w-3 h-3" strokeWidth={1.5} />
+              Remover do dia
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuItem onClick={() => onDelete(task)} className="text-xs gap-2 py-1.5 text-rose-500 focus:text-rose-500">
+            <Trash2 className="w-3 h-3" strokeWidth={1.5} />
             Excluir
           </DropdownMenuItem>
         </DropdownMenuContent>

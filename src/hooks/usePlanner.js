@@ -76,6 +76,10 @@ export function usePlanner() {
         updateTask.mutate({ id: task.id, data: { scheduled_date: toISODate(new Date(date)) } });
     };
 
+    const handleUnscheduleTask = (task) => {
+        updateTask.mutate({ id: task.id, data: { scheduled_date: null } });
+    };
+
     const handleAddTask = (date) => {
         setDefaultDay(date);
         setEditingTask(null);
@@ -169,6 +173,7 @@ export function usePlanner() {
         handleToggleTask,
         handleDeleteTask,
         handleMoveDay,
+        handleUnscheduleTask,
         handleAddTask,
         handleEditTask,
         handleToggleExpand,

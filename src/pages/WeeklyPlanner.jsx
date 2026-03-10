@@ -97,6 +97,7 @@ export default function WeeklyPlanner() {
                   onToggle={planner.handleToggleTask}
                   onDelete={planner.handleDeleteTask}
                   onMoveDay={planner.handleMoveDay}
+                  onUnschedule={planner.handleUnscheduleTask}
                   onEdit={planner.handleEditTask}
                   isToday={planner.weekOffset === 0 && day === today}
                   draggable={draggable}
