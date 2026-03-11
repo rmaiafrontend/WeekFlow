@@ -11,7 +11,7 @@ import { COLOR_OPTIONS } from "@/lib/constants";
 
 const emptyForm = { name: "", color: "indigo", description: "" };
 
-export default function AddProjectDialog({ open, onOpenChange, onSave, onDelete, editingProject }) {
+export default function AddProjectDialog({ open, onOpenChange, onSave, onDelete, editingProject, isPending }) {
   const isEditing = !!editingProject;
   const [form, setForm] = useState(emptyForm);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -36,12 +36,13 @@ export default function AddProjectDialog({ open, onOpenChange, onSave, onDelete,
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name.trim()) return;
+    if (!form.name.trim() || isPending) return;
     onSave(form);
     onOpenChange(false);
   };
 
   const handleDelete = () => {
+    if (isPending) return;
     if (!confirmDelete) {
       setConfirmDelete(true);
       return;
@@ -170,13 +171,13 @@ export default function AddProjectDialog({ open, onOpenChange, onSave, onDelete,
               </button>
               <button
                 type="submit"
-                disabled={!canSubmit}
-                className={`px-5 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${canSubmit
+                disabled={!canSubmit || isPending}
+                className={`px-5 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${canSubmit && !isPending
                   ? "bg-gradient-to-r from-emerald-600 to-emerald-500 dark:from-emerald-500 dark:to-emerald-400 text-white shadow-md shadow-emerald-500/25 hover:shadow-lg hover:shadow-emerald-500/30 hover:from-emerald-700 hover:to-emerald-600 dark:hover:from-emerald-600 dark:hover:to-emerald-500 active:scale-[0.98]"
                   : "bg-gray-100 dark:bg-gray-800 text-gray-300 dark:text-gray-600 cursor-not-allowed"
                   }`}
               >
-                {isEditing ? "Salvar alterações" : "Criar projeto"}
+                {isPending ? "Salvando..." : isEditing ? "Salvar alterações" : "Criar projeto"}
               </button>
             </div>
           </div>

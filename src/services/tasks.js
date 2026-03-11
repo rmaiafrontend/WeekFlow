@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase';
 
 export const taskService = {
     async list() {
-        const { data, error } = await supabase.from('tasks').select('*');
+        const { data, error } = await supabase.from('tasks').select('*').order('position', { ascending: true });
         if (error) throw error;
         return data;
     },
@@ -23,5 +23,14 @@ export const taskService = {
     async delete(id) {
         const { error } = await supabase.from('tasks').delete().eq('id', id);
         if (error) throw error;
+    },
+
+    async reorder(updates) {
+        const promises = updates.map(({ id, position }) =>
+            supabase.from('tasks').update({ position }).eq('id', id)
+        );
+        const results = await Promise.all(promises);
+        const failed = results.find((r) => r.error);
+        if (failed) throw failed.error;
     },
 };

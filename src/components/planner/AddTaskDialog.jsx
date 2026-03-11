@@ -26,7 +26,7 @@ const emptyForm = (defaultDate) => ({
   notes: "",
 });
 
-export default function AddTaskDialog({ open, onOpenChange, projects, onSave, defaultDate, editingTask }) {
+export default function AddTaskDialog({ open, onOpenChange, projects, onSave, defaultDate, editingTask, isPending }) {
   const isEditing = !!editingTask;
   const [form, setForm] = useState(emptyForm(defaultDate));
   const [showNotes, setShowNotes] = useState(false);
@@ -51,7 +51,7 @@ export default function AddTaskDialog({ open, onOpenChange, projects, onSave, de
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.title.trim() || !form.project_id) return;
+    if (!form.title.trim() || !form.project_id || isPending) return;
     onSave({ ...form, scheduled_date: form.scheduled_date || null });
     onOpenChange(false);
   };
@@ -206,13 +206,13 @@ export default function AddTaskDialog({ open, onOpenChange, projects, onSave, de
               </button>
               <button
                 type="submit"
-                disabled={!canSubmit}
-                className={`px-5 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${canSubmit
+                disabled={!canSubmit || isPending}
+                className={`px-5 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${canSubmit && !isPending
                   ? "bg-gradient-to-r from-indigo-600 to-indigo-500 dark:from-indigo-500 dark:to-indigo-400 text-white shadow-md shadow-indigo-500/25 hover:shadow-lg hover:shadow-indigo-500/30 hover:from-indigo-700 hover:to-indigo-600 dark:hover:from-indigo-600 dark:hover:to-indigo-500 active:scale-[0.98]"
                   : "bg-gray-100 dark:bg-gray-800 text-gray-300 dark:text-gray-600 cursor-not-allowed"
                   }`}
               >
-                {isEditing ? "Salvar alterações" : "Criar task"}
+                {isPending ? "Salvando..." : isEditing ? "Salvar alterações" : "Criar task"}
               </button>
             </div>
           </div>

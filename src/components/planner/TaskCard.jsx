@@ -17,7 +17,7 @@ export default function TaskCard({ task, project, onToggle, onDelete, onMoveDay,
   const content = (dragHandleProps, isDragging) => (
     <div className={`group flex items-start gap-2.5 py-2 px-0 ${isDragging ? "opacity-70" : ""} hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-md transition-colors`}>
       {isDraggable && (
-        <div {...dragHandleProps} className="mt-1 flex-shrink-0 cursor-grab opacity-0 group-hover:opacity-100 transition-opacity">
+        <div {...dragHandleProps} className="mt-1 flex-shrink-0 cursor-grab opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
           <GripVertical className="w-3 h-3 text-gray-300" />
         </div>
       )}
@@ -37,7 +37,7 @@ export default function TaskCard({ task, project, onToggle, onDelete, onMoveDay,
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+          <Button variant="ghost" size="icon" className="h-6 w-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity flex-shrink-0">
             <MoreHorizontal className="w-3.5 h-3.5 text-gray-400" />
           </Button>
         </DropdownMenuTrigger>

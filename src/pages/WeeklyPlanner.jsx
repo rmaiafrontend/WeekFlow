@@ -185,7 +185,7 @@ export default function WeeklyPlanner() {
             onAddTask={() => planner.handleAddTask(null)}
           />
           <div className="flex-1 overflow-y-auto">
-            {mobileView === "week" ? weekPanel(false) : <Sidebar {...sidebarProps} />}
+            {mobileView === "week" ? weekPanel(true) : <Sidebar {...sidebarProps} />}
           </div>
         </div>
 
@@ -197,6 +197,7 @@ export default function WeeklyPlanner() {
           onSave={planner.handleSaveTask}
           defaultDate={planner.defaultDay}
           editingTask={planner.editingTask}
+          isPending={planner.isCreatingTask || planner.isSavingTask}
         />
         <AddProjectDialog
           open={planner.showAddProject}
@@ -204,6 +205,7 @@ export default function WeeklyPlanner() {
           onSave={planner.handleSaveProject}
           onDelete={planner.handleDeleteProject}
           editingProject={planner.editingProject}
+          isPending={planner.isCreatingProject || planner.isSavingProject || planner.isDeletingProject}
         />
       </DragDropContext>
     </div>
