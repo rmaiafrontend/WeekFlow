@@ -3,6 +3,9 @@ module.exports = {
     darkMode: ["class"],
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
+  	fontFamily: {
+  		sans: ['"Onest"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  	},
   	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',

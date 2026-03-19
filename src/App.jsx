@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import Layout from './Layout';
 import WeeklyPlanner from './pages/WeeklyPlanner';
+import HabitsPage from './pages/HabitsPage';
 import LoginPage from './pages/LoginPage';
 
 const ProtectedRoute = ({ children }) => {
@@ -68,6 +69,13 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <WeeklyPlanner />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/habitos" element={
+              <ProtectedRoute>
+                <Layout>
+                  <HabitsPage />
                 </Layout>
               </ProtectedRoute>
             } />
