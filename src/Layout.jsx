@@ -61,6 +61,16 @@ export function AppHeader() {
               Planner
             </Link>
             <Link
+              to="/tarefas"
+              className={`text-sm pb-0.5 transition-colors ${
+                location.pathname === "/tarefas"
+                  ? "text-gray-900 dark:text-gray-100 border-b border-gray-900 dark:border-gray-100"
+                  : "text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400"
+              }`}
+            >
+              Tarefas
+            </Link>
+            <Link
               to="/habitos"
               className={`text-sm pb-0.5 transition-colors ${
                 location.pathname === "/habitos"
